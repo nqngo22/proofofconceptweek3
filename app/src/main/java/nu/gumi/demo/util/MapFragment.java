@@ -32,15 +32,23 @@ public class MapFragment extends Fragment{
         int width = tiles.getWidth();
         Bitmap mBitmap = Bitmap.createBitmap(tiles, 0 , 0, width, width);
         Bitmap mBitmap2 = Bitmap.createBitmap(tiles, 0 , width, width, width);
-        Bitmap bmOverlay = Bitmap.createBitmap(width * 40, width, Bitmap.Config.ARGB_8888);
+        Bitmap bmOverlay = Bitmap.createBitmap(width * 40, width * 20, Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(bmOverlay);
-
-            for(int j = 0; j < 40; j++){
-                if(j % 2 == 0)
-                    canvas.drawBitmap(mBitmap, j * width, 0, null);
-                else
-                    canvas.drawBitmap(mBitmap2, j * width, 0, null);
+        for(int i = 0; i < 24; i++) {
+            for (int j = 0; j < 40; j++) {
+                if(i % 2 == 0) {
+                    if (j % 2 == 0)
+                        canvas.drawBitmap(mBitmap, j * width, i * width, null);
+                    else
+                        canvas.drawBitmap(mBitmap2, j * width, i * width, null);
+                } else {
+                    if (j % 2 == 0)
+                        canvas.drawBitmap(mBitmap2, j * width, i * width, null);
+                    else
+                        canvas.drawBitmap(mBitmap, j * width, i * width, null);
+                }
             }
+        }
 
         mapView.setImageBitmap(bmOverlay);
 
